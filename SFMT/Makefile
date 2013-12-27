@@ -1,0 +1,2 @@
+SFMT.o: SFMT.c
+	gcc -c SFMT.c -DMEXP=19937

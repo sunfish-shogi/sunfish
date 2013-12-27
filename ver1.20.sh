@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./cut metal_s8 metal_g8 metal_s24 metal_g24 metalX_s8 metalY_s8 metalX_g8 metalY_g8 metalX_s24 metalY_s24 metalX_g24 metalY_g24 ke25_fu ke45_fu ke65_fu ke85_fu king_ske25_fu king_ske45_fu king_ske65_fu king_ske85_fu king_gke25_fu king_gke45_fu king_gke65_fu king_gke85_fu kingX_ske25_fi kingY_ske25_fi kingX_ske45_fi kingY_ske45_fi kingX_ske65_fi kingY_ske65_fi kingX_ske85_fi kingY_ske85_fi kingX_gke25_fi kingY_gke25_fi kingX_gke45_fi kingY_gke45_fi kingX_gke65_fi kingY_gke65_fi kingX_gke85_fi kingY_gke85_fi king_ske25_fi king_ske45_fi king_ske65_fi king_ske85_fi king_gke25_fi king_gke45_fi king_gke65_fi king_gke85_fi king_effectS king_effectG kingX_effectS kingY_effectS kingX_effectG kingY_effectG

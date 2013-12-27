@@ -1,0 +1,81 @@
+# CSA clientに関する設定
+# #で始まる行はコメント
+
+# ホスト名
+host=localhost
+#host=wdoor.c.u-tokyo.ac.jp
+#host=gserver.computer-shogi.org
+
+# ログインユーザ名
+user=ここにユーザ名を記述
+
+# ログインパスワード
+pass=ここにパスワードを記述
+# floodgateのレーティング対局なら...
+#pass=floodgate-900-0,ここにパスワードを記述
+
+# 最大探索深さ(詰み探索を除く)
+depth=32
+
+# 1手当たりの最大思考時間(0で無制限)
+limit=10
+
+# 1手当たりの最大探索ノード数(0で無制限)
+node=0
+
+# 投了のしきい値(500以上)
+resign=2500
+
+# スレッド数
+threads=1
+
+# ハッシュ表のサイズ[MBytes]
+hash=80
+
+# 相手番思考( 1 or 0 )
+enemy=1
+
+# 合議タイプ( g:single s:serial p:Parallel )
+constype=g
+
+# 合議プレイヤー数
+consnum=1
+
+# 乱数合議の偏差
+deviation=0.0
+
+# 連続対局回数
+repeat=100
+
+# 連続対局を中断したいときにtrueにする. 
+# (毎局開始前にここをみて, trueならログアウトする)
+stop=false
+
+# 通信におけるタイムアウト時間(秒)
+# 廃止予定!!(keepaliveへ移行)
+#timeout=600
+
+# keep-alive
+# (現在はlinuxだけ)
+keepalive=1
+keepidle=120
+keepintvl=60
+keepcnt=10
+
+# サーバにログインする時間
+# asctimeの出力形式で記述
+#timer=Wed Sep 30 16:00:00 1987
+
+# ワイルドカードを使用可能(*だけ)
+#timer=00:00:*
+
+# floodgateの対局なら...
+# 28分と58分にログイン
+#timer=*:28:*
+#timer=*:58:*
+
+# floodgateモード(読み筋, 評価値の送信)
+floodgate=0
+
+# 棋譜を保存するディレクトリ
+kifu=Kifu

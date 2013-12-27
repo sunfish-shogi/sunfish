@@ -1,0 +1,48 @@
+# 機械学習に関する設定
+# #で始まる行はコメント
+
+# 実行モード
+# [n]ormal, [p]rincipal variation, 
+# [g]radient, [a]djustment
+# Sunfishの隠しオプション(-lp, -lg, -la)
+# でも指定可能(コマンド引数が優先)
+mode=n
+#mode=p
+#mode=g
+#mode=a
+
+# 棋譜ファイルのあるディレクトリ
+directory=ここにディレクトリのパスを記述
+
+# 勾配を読み込むディレクトリ
+# (実行モードをaにしたとき用)
+gradients=ここにディレクトリのパスを記述
+
+# 勾配計算時の詳細出力(on/off)
+# (PerlのGUI用)
+detail=off
+
+# 繰り返し回数
+steps=100
+
+# 1回当たりのパラメータの変更回数
+adjust=32
+
+# スレッド数
+threads=6
+
+# ハッシュ表のサイズ[MBytes]
+hash=800
+
+# 探索窓
+swmin=256
+swmax=256
+
+# 以下、異常終了/強制終了時の再開用
+
+# くり返し回数のカウント開始値
+# 続きから行う場合に設定
+start=0
+
+# nモードの時に第2フェーズから再開するか
+resume=0
