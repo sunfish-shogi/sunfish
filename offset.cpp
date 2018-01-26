@@ -1,4 +1,4 @@
-/* offset.cpp
+﻿/* offset.cpp
  * 各パラメータのoffsetを管理
  */
 

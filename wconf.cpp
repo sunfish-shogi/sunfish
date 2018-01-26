@@ -1,6 +1,6 @@
-/* wconf.cpp
+я╗┐/* wconf.cpp
  * R.Kubo 2011-2012
- * wconfР▌ТшГtГ@ГCГЛВ╠К╟ЧЭ
+ * wconfшинхоЪуГХуВбуВдуГлуБочобчРЖ
  */
 
 #include "wconf.h"

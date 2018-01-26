@@ -1,4 +1,4 @@
-/* effect.cpp
+﻿/* effect.cpp
  * R.Kubo 2010
  * 盤面の利き情報
  */

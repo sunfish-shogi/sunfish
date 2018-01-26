@@ -1,4 +1,4 @@
-/* limit.cpp
+﻿/* limit.cpp
  * R.Kubo 2010
  * 時間制限
  */
@@ -14,7 +14,9 @@ Ctrl + C 割り込み
 	lim_iflag = 1;
 }
 
-#ifdef WIN32
+#if defined(WIN32) && defined(_WIN64)
+VOID CALLBACK Think::sigtime( UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2 ){
+#elif defined(WIN32)
 VOID CALLBACK Think::sigtime( UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2 ){
 #else
 void Think::sigtime( int ){

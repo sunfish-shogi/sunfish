@@ -1,4 +1,4 @@
-/* offset.h
+﻿/* offset.h
  * 各パラメータのoffsetを管理
  */
 

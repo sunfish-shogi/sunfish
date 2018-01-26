@@ -1,4 +1,4 @@
-/* csa.cpp
+﻿/* csa.cpp
  * R.Kubo 2010-2012
  * CSAプロトコルによる対局
  */

@@ -1,4 +1,4 @@
-/* think.cpp
+﻿/* think.cpp
  * R.Kubo 2008-2012
  * 将棋の思考ルーチン
  */

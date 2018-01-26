@@ -1,4 +1,4 @@
-/* kifu.cpp
+﻿/* kifu.cpp
  * R.Kubo 2008-2010
  * 棋譜の入出力
  */

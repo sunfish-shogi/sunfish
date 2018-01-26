@@ -1,4 +1,4 @@
-/* sunfish.cpp
+﻿/* sunfish.cpp
  * R.Kubo 2008-2012
  * 将棋の対局プログラム
  */

@@ -1,6 +1,6 @@
-/* window.cpp
+Ôªø/* window.cpp
  * R.Kubo 2009-2010
- * éqÉEÉBÉìÉhÉEÇÃêßå‰
+ * Â≠ê„Ç¶„Ç£„É≥„Éâ„Ç¶„ÅÆÂà∂Âæ°
  */
 
 #include <windows.h>
@@ -37,34 +37,34 @@ enum{
 	ID_INFO,
 };
 
-// Ç±Ç±ÇèëÇ´ä∑Ç¶ÇΩÇÁÅAè„ÇÃenumÇ∆çsêî(W)ÇïœÇ¶ÇÈÇ±Ç∆ÅB
+// „Åì„Åì„ÇíÊõ∏„ÅçÊèõ„Åà„Åü„Çâ„ÄÅ‰∏ä„ÅÆenum„Å®Ë°åÊï∞(W)„ÇíÂ§â„Åà„Çã„Åì„Å®„ÄÇ
 OBJECT Object[] = {
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(0), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(0), STATIC_WIDTH, STATIC_HEIGHT, 0, "Value" },
-	{ NULL, "EDIT"  , ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(0),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(0),   EDIT_WIDTH,   EDIT_HEIGHT, 0, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(1), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(1), STATIC_WIDTH, STATIC_HEIGHT, 0, "Node" },
-	{ NULL, "EDIT"  , ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(1),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(1),   EDIT_WIDTH,   EDIT_HEIGHT, 0, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(2), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(2), STATIC_WIDTH, STATIC_HEIGHT, 0, "NPS" },
-	{ NULL, "EDIT"  , ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(2),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(2),   EDIT_WIDTH,   EDIT_HEIGHT, 0, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(3), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(3), STATIC_WIDTH, STATIC_HEIGHT, 0, "Depth" },
-	{ NULL, "EDIT"  , ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(3),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(3),   EDIT_WIDTH,   EDIT_HEIGHT, 0, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(4), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(4), STATIC_WIDTH, STATIC_HEIGHT, 0, "Time(Used)" },
-	{ NULL, "EDIT"  , ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(4),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(4),   EDIT_WIDTH,   EDIT_HEIGHT, 0, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(5), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(5), STATIC_WIDTH, STATIC_HEIGHT, 0, "Time(Limit)" },
-	{ NULL, "EDIT"  , ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(5),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(5),   EDIT_WIDTH,   EDIT_HEIGHT, 1, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(6), STATIC_WIDTH, STATIC_HEIGHT, STATIC_LEFT_W, STATIC_TOP(0), STATIC_WIDTH, STATIC_HEIGHT, 0, "Threads" },
-	{ NULL, "EDIT"  , ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(6),   EDIT_WIDTH,   EDIT_HEIGHT,   EDIT_LEFT_W,   EDIT_TOP(0),   EDIT_WIDTH,   EDIT_HEIGHT, 1, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(7), STATIC_WIDTH, STATIC_HEIGHT, STATIC_LEFT_W, STATIC_TOP(1), STATIC_WIDTH, STATIC_HEIGHT, 0, "Hash[MB]" },
-	{ NULL, "EDIT"  , ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(7),   EDIT_WIDTH,   EDIT_HEIGHT,   EDIT_LEFT_W,   EDIT_TOP(1),   EDIT_WIDTH,   EDIT_HEIGHT, 1, "" },
-	{ NULL, "STATIC", ST_STATIC, STATIC_LEFT, STATIC_TOP(8), STATIC_WIDTH, STATIC_HEIGHT, STATIC_LEFT_W, STATIC_TOP(2), STATIC_WIDTH, STATIC_HEIGHT, 0, "Resign" },
-	{ NULL, "EDIT"  , ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(8),   EDIT_WIDTH,   EDIT_HEIGHT,   EDIT_LEFT_W,   EDIT_TOP(2),   EDIT_WIDTH,   EDIT_HEIGHT, 1, "" },
-	{ NULL, "BUTTON", ST_CHECK , STATIC_LEFT,   EDIT_TOP(9),  CHECK_WIDTH,   EDIT_HEIGHT, STATIC_LEFT_W,   EDIT_TOP(3),  CHECK_WIDTH,   EDIT_HEIGHT, 1, "Ponder" },
-	{ NULL, "BUTTON", ST_CHECK ,  CHECK_LEFT,   EDIT_TOP(9),  CHECK_WIDTH,   EDIT_HEIGHT, STATIC_LEFT_W,   EDIT_TOP(4),  CHECK_WIDTH,   EDIT_HEIGHT, 0, "Result" },
-	{ NULL, "BUTTON", ST_CHECK , STATIC_LEFT,  EDIT_TOP(10),  CHECK_WIDTH,   EDIT_HEIGHT, STATIC_LEFT_W,   EDIT_TOP(5),  CHECK_WIDTH,   EDIT_HEIGHT, 0, "Wide" },
-	{ NULL, "LISTBOX",ST_LIST  , STATIC_LEFT,  EDIT_TOP(11),  LEDIT_WIDTH,  LEDIT_HEIGHT,   STATIC_LEFT,   EDIT_TOP(6),LEDIT_WIDTH_W,LEDIT_HEIGHT_W, 0,  NULL },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(0), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(0), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Value") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(0),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(0),   EDIT_WIDTH,   EDIT_HEIGHT, 0, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(1), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(1), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Node") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(1),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(1),   EDIT_WIDTH,   EDIT_HEIGHT, 0, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(2), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(2), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("NPS") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(2),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(2),   EDIT_WIDTH,   EDIT_HEIGHT, 0, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(3), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(3), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Depth") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(3),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(3),   EDIT_WIDTH,   EDIT_HEIGHT, 0, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(4), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(4), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Time(Used)") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT_R,   EDIT_LEFT,   EDIT_TOP(4),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(4),   EDIT_WIDTH,   EDIT_HEIGHT, 0, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(5), STATIC_WIDTH, STATIC_HEIGHT,   STATIC_LEFT, STATIC_TOP(5), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Time(Limit)") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(5),   EDIT_WIDTH,   EDIT_HEIGHT,     EDIT_LEFT,   EDIT_TOP(5),   EDIT_WIDTH,   EDIT_HEIGHT, 1, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(6), STATIC_WIDTH, STATIC_HEIGHT, STATIC_LEFT_W, STATIC_TOP(0), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Threads") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(6),   EDIT_WIDTH,   EDIT_HEIGHT,   EDIT_LEFT_W,   EDIT_TOP(0),   EDIT_WIDTH,   EDIT_HEIGHT, 1, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(7), STATIC_WIDTH, STATIC_HEIGHT, STATIC_LEFT_W, STATIC_TOP(1), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Hash[MB]") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(7),   EDIT_WIDTH,   EDIT_HEIGHT,   EDIT_LEFT_W,   EDIT_TOP(1),   EDIT_WIDTH,   EDIT_HEIGHT, 1, TEXT("") },
+	{ NULL, TEXT("STATIC" ), ST_STATIC, STATIC_LEFT, STATIC_TOP(8), STATIC_WIDTH, STATIC_HEIGHT, STATIC_LEFT_W, STATIC_TOP(2), STATIC_WIDTH, STATIC_HEIGHT, 0, TEXT("Resign") },
+	{ NULL, TEXT("EDIT"   ), ST_EDIT  ,   EDIT_LEFT,   EDIT_TOP(8),   EDIT_WIDTH,   EDIT_HEIGHT,   EDIT_LEFT_W,   EDIT_TOP(2),   EDIT_WIDTH,   EDIT_HEIGHT, 1, TEXT("") },
+	{ NULL, TEXT("BUTTON" ), ST_CHECK , STATIC_LEFT,   EDIT_TOP(9),  CHECK_WIDTH,   EDIT_HEIGHT, STATIC_LEFT_W,   EDIT_TOP(3),  CHECK_WIDTH,   EDIT_HEIGHT, 1, TEXT("Ponder") },
+	{ NULL, TEXT("BUTTON" ), ST_CHECK ,  CHECK_LEFT,   EDIT_TOP(9),  CHECK_WIDTH,   EDIT_HEIGHT, STATIC_LEFT_W,   EDIT_TOP(4),  CHECK_WIDTH,   EDIT_HEIGHT, 0, TEXT("Result") },
+	{ NULL, TEXT("BUTTON" ), ST_CHECK , STATIC_LEFT,  EDIT_TOP(10),  CHECK_WIDTH,   EDIT_HEIGHT, STATIC_LEFT_W,   EDIT_TOP(5),  CHECK_WIDTH,   EDIT_HEIGHT, 0, TEXT("Wide") },
+	{ NULL, TEXT("LISTBOX"), ST_LIST  , STATIC_LEFT,  EDIT_TOP(11),  LEDIT_WIDTH,  LEDIT_HEIGHT,   STATIC_LEFT,   EDIT_TOP(6),LEDIT_WIDTH_W,LEDIT_HEIGHT_W, 0, NULL },
 };
-#define W				11 // çsêî
+#define W				11 // Ë°åÊï∞
 
-// ÉEÉBÉìÉhÉEÇÃÉnÉìÉhÉã
+// „Ç¶„Ç£„É≥„Éâ„Ç¶„ÅÆ„Éè„É≥„Éâ„É´
 HWND hSikouWnd = NULL;
 
 extern int limit;
@@ -79,13 +79,12 @@ void search_inf0();
 
 void CreateChildWindow( HWND hwnd );
 LRESULT CALLBACK SikouWndProc( HWND hwnd, UINT msg, WPARAM wp, LPARAM lp );
-void DisplayString( const char* str = NULL );
 
 BOOL bWindowCreated = FALSE;
 
 unsigned __stdcall CreateMainWindow( LPVOID p ){
 /**************************************************************
-ÉÅÉCÉìÉEÉBÉìÉhÉEÇÃê∂ê¨
+„É°„Ç§„É≥„Ç¶„Ç£„É≥„Éâ„Ç¶„ÅÆÁîüÊàê
 **************************************************************/
 	WNDCLASS winc;
 	HINSTANCE hInst = (HINSTANCE)p;
@@ -100,13 +99,13 @@ unsigned __stdcall CreateMainWindow( LPVOID p ){
 	winc.hCursor = LoadCursor( NULL, IDC_ARROW );
 	winc.hbrBackground = CreateSolidBrush( RGB( 236, 233, 216 ) );
 	winc.lpszMenuName = NULL;
-	winc.lpszClassName = "Sikou";
+	winc.lpszClassName = TEXT("Sikou");
 
 	if( !RegisterClass( &winc ) )
 		return (DWORD)0;
 
 	hSikouWnd = CreateWindow(
-		"Sikou", "Sunfish SIKOU.DLL",
+		TEXT("Sikou"), TEXT("Sunfish SIKOU.DLL"),
 		WS_OVERLAPPED | WS_CAPTION |
 		WS_MINIMIZEBOX | WS_VISIBLE |
 		WS_SYSMENU,
@@ -127,7 +126,7 @@ unsigned __stdcall CreateMainWindow( LPVOID p ){
 
 void DestroyMainWindow(){
 /**************************************************************
-ÉÅÉCÉìÉEÉBÉìÉhÉEÇÃîjâÛ
+„É°„Ç§„É≥„Ç¶„Ç£„É≥„Éâ„Ç¶„ÅÆÁ†¥Â£ä
 **************************************************************/
 	if( hSikouWnd != NULL ){
 		if( IsWindow( hSikouWnd ) ){
@@ -139,22 +138,26 @@ void DestroyMainWindow(){
 
 void CreateChildWindow( HWND hWnd ){
 /**************************************************************
-éqÉEÉBÉìÉhÉEÇÃê∂ê¨
+Â≠ê„Ç¶„Ç£„É≥„Éâ„Ç¶„ÅÆÁîüÊàê
 **************************************************************/
 	HFONT hFont;
+#ifdef _WIN64
+	HINSTANCE hInst = (HINSTANCE)GetWindowLong( hWnd, GWLP_HINSTANCE );
+#else
 	HINSTANCE hInst = (HINSTANCE)GetWindowLong( hWnd, GWL_HINSTANCE );
+#endif
 	HWND hObj;
-	char buf[16];
+	TCHAR buf[16];
 	int i;
 
-	//ÉRÉìÉgÉçÅ[ÉãÇÃîzíuÇ∆ÉtÉHÉìÉgÇÃê›íË
+	//„Ç≥„É≥„Éà„É≠„Éº„É´„ÅÆÈÖçÁΩÆ„Å®„Éï„Ç©„É≥„Éà„ÅÆË®≠ÂÆö
 	hFont = CreateFont( 
 		FONT_SIZE, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, 
 		SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS, 
 		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, 
-		VARIABLE_PITCH | FF_ROMAN, "ÉSÉVÉbÉN" );
+		VARIABLE_PITCH | FF_ROMAN, TEXT("„Ç¥„Ç∑„ÉÉ„ÇØ" ));
 
-	// ÉEÉBÉìÉhÉEê∂ê¨
+	// „Ç¶„Ç£„É≥„Éâ„Ç¶ÁîüÊàê
 	for( i = 0 ; i < sizeof(Object) / sizeof(OBJECT) ; i++ ){
 		hObj = CreateWindow(
 			Object[i].ClassName, Object[i].DefaultString, Object[i].style,
@@ -165,15 +168,26 @@ void CreateChildWindow( HWND hWnd ){
 		Object[i].hWnd = hObj;
 	}
 
-	// èâä˙âª
-	sprintf( buf, "%d", limit );
+	// ÂàùÊúüÂåñ
+#ifdef _WIN64
+	swprintf( buf, sizeof(buf), L"%d", limit );
 	SetWindowText( Object[ID_IN_TIME].hWnd, buf );
-	sprintf( buf, "%d", thread_num );
+	swprintf( buf, sizeof(buf), L"%d", thread_num );
 	SetWindowText( Object[ID_THREADS].hWnd, buf );
-	sprintf( buf, "%d", resign_value );
+	swprintf( buf, sizeof(buf), L"%d", resign_value );
 	SetWindowText( Object[ID_RESIGN].hWnd, buf );
-	sprintf( buf, "%d", hash_mbytes );
+	swprintf( buf, sizeof(buf), L"%d", hash_mbytes );
 	SetWindowText( Object[ID_HASH].hWnd, buf );
+#else
+	wsprintf( buf, L"%d", limit );
+	SetWindowText( Object[ID_IN_TIME].hWnd, buf );
+	wsprintf( buf, L"%d", thread_num );
+	SetWindowText( Object[ID_THREADS].hWnd, buf );
+	wsprintf( buf, L"%d", resign_value );
+	SetWindowText( Object[ID_RESIGN].hWnd, buf );
+	wsprintf( buf, L"%d", hash_mbytes );
+	SetWindowText( Object[ID_HASH].hWnd, buf );
+#endif
 	SendMessage( Object[ID_PONDER].hWnd, BM_SETCHECK, (WPARAM)bPonder, 0 );
 	SendMessage( Object[ID_RESULT].hWnd, BM_SETCHECK, (WPARAM)bResult, 0 );
 	SendMessage( Object[ID_WIDE].hWnd, BM_SETCHECK, (WPARAM)bWide, 0 );
@@ -182,7 +196,7 @@ void CreateChildWindow( HWND hWnd ){
 
 void SetWideWindowSize( HWND hWnd ){
 /**************************************************************
-ÉèÉCÉhï\é¶
+„ÉØ„Ç§„ÉâË°®Á§∫
 **************************************************************/
 	int i;
 	RECT rect;
@@ -190,7 +204,7 @@ void SetWideWindowSize( HWND hWnd ){
 	int result_y = ( bResult != FALSE ? 0 :
 		( bWide != FALSE ? Object[ID_INFO].heightW : Object[ID_INFO].height ) );
 
-	// ÉTÉCÉYïœçX(ÉÅÉCÉìÉEÉBÉìÉhÉE)
+	// „Çµ„Ç§„Ç∫Â§âÊõ¥(„É°„Ç§„É≥„Ç¶„Ç£„É≥„Éâ„Ç¶)
 	GetWindowRect( hWnd, &rect );
 	MoveWindow( hWnd, rect.left, rect.top,
 		WINDOW_SIZE_X + wide_x + GetSystemMetrics( SM_CXFIXEDFRAME ) * 2,
@@ -198,7 +212,7 @@ void SetWideWindowSize( HWND hWnd ){
 		+ GetSystemMetrics( SM_CYCAPTION ) - result_y,
 		TRUE );
 
-	// ÉTÉCÉYïœçX
+	// „Çµ„Ç§„Ç∫Â§âÊõ¥
 	for( i = 0 ; i < sizeof(Object) / sizeof(OBJECT) ; i++ ){
 		if( bWide ){
 			MoveWindow( Object[i].hWnd, Object[i].leftW, Object[i].topW,
@@ -213,18 +227,18 @@ void SetWideWindowSize( HWND hWnd ){
 
 LRESULT CALLBACK SikouWndProc( HWND hWnd, UINT msg, WPARAM wp, LPARAM lp ){
 /**************************************************************
-ÉÅÉbÉZÅ[ÉWÇÃèàóù
+„É°„ÉÉ„Çª„Éº„Ç∏„ÅÆÂá¶ÁêÜ
 **************************************************************/
 	HMENU hMenu;
 
 	switch( msg ){
 
 	case WM_CREATE:
-		// CloseÉ{É^ÉìÇñ≥å¯âª
+		// Close„Éú„Çø„É≥„ÇíÁÑ°ÂäπÂåñ
 		hMenu = GetSystemMenu( hWnd, FALSE );
 		RemoveMenu( hMenu, SC_CLOSE, FALSE );
 
-		// äeéÌÉEÉBÉìÉhÉEê∂ê¨
+		// ÂêÑÁ®Æ„Ç¶„Ç£„É≥„Éâ„Ç¶ÁîüÊàê
 		CreateChildWindow( hWnd );
 
 		SetWideWindowSize( hWnd );
@@ -237,40 +251,56 @@ LRESULT CALLBACK SikouWndProc( HWND hWnd, UINT msg, WPARAM wp, LPARAM lp ){
 		switch( LOWORD(wp) ){
 		case ID_IN_TIME:
 			if( HIWORD( wp ) == EN_CHANGE ){
-				char str[32];
+				TCHAR str[32];
 				GetWindowText( Object[ID_IN_TIME].hWnd, str, sizeof(str) );
 				if( str[0] != '\0' ){
-					limit = strtol( str, NULL, 10 );
+#ifdef _WIN64
+					limit = wcstol( str, NULL, 10 );
+#else
+					limit = strtol( (char*)str, NULL, 10 );
+#endif
 				}
 			}
 			break;
 
 		case ID_THREADS:
 			if( HIWORD( wp ) == EN_CHANGE ){
-				char str[32];
+				TCHAR str[32];
 				GetWindowText( Object[ID_THREADS].hWnd, str, sizeof(str) );
 				if( str[0] != '\0' ){
-					thread_num = strtol( str, NULL, 10 );
+#ifdef _WIN64
+					thread_num = wcstol( str, NULL, 10 );
+#else
+					thread_num = strtol( (char*)str, NULL, 10 );
+#endif
 				}
 			}
 			break;
 
 		case ID_RESIGN:
 			if( HIWORD( wp ) == EN_CHANGE ){
-				char str[32];
+				TCHAR str[32];
 				GetWindowText( Object[ID_RESIGN].hWnd, str, sizeof(str) );
 				if( str[0] != '\0' ){
-					resign_value = strtol( str, NULL, 10 );
+#ifdef _WIN64
+					resign_value = wcstol( str, NULL, 10 );
+#else
+					resign_value = strtol( (char*)str, NULL, 10 );
+#endif
 				}
 			}
 			break;
 
 		case ID_HASH:
 			if( HIWORD( wp ) == EN_CHANGE ){
-				char str[32];
+				TCHAR str[32];
 				GetWindowText( Object[ID_HASH].hWnd, str, sizeof(str) );
 				if( str[0] != '\0' ){
-					hash_mbytes = strtol( str, NULL, 10 );
+#ifdef _WIN64
+					hash_mbytes = wcstol( str, NULL, 10 );
+#else
+					hash_mbytes = strtol( (char*)str, NULL, 10 );
+#endif
 				}
 			}
 			break;
@@ -286,7 +316,7 @@ LRESULT CALLBACK SikouWndProc( HWND hWnd, UINT msg, WPARAM wp, LPARAM lp ){
 			break;
 
 		case ID_WIDE:
-			// ÉèÉCÉhï\é¶ / í èÌï\é¶
+			// „ÉØ„Ç§„ÉâË°®Á§∫ / ÈÄöÂ∏∏Ë°®Á§∫
 			bWide = ( BST_CHECKED == SendMessage( Object[ID_WIDE].hWnd, BM_GETCHECK, 0, 0 ) );
 			SetWideWindowSize( hWnd );
 			break;
@@ -313,7 +343,7 @@ LRESULT CALLBACK SikouWndProc( HWND hWnd, UINT msg, WPARAM wp, LPARAM lp ){
 
 void SetPlayMode( BOOL bEnable ){
 /**************************************************************
-ëŒã«íÜÅAë“ã@íÜÇÃêÿÇËë÷Ç¶
+ÂØæÂ±Ä‰∏≠„ÄÅÂæÖÊ©ü‰∏≠„ÅÆÂàá„ÇäÊõø„Åà
 **************************************************************/
 	int i;
 
@@ -325,19 +355,19 @@ void SetPlayMode( BOOL bEnable ){
 
 void InitProgress(){
 /**************************************************************
-èâä˙âª
+ÂàùÊúüÂåñ
 **************************************************************/
 	SendMessage( Object[ID_INFO].hWnd, LB_RESETCONTENT, 0, 0 );
 }
 
 void AddProgress( const char* str ){
 /**************************************************************
-1çsí«â¡
+1Ë°åËøΩÂä†
 **************************************************************/
 	int num;
 
 	if( str != NULL ){
-		SendMessage( Object[ID_INFO].hWnd, LB_INSERTSTRING, -1, (LPARAM)str );
+		SendMessageA( Object[ID_INFO].hWnd, LB_INSERTSTRING, -1, (LPARAM)str );
 		num = SendMessage( Object[ID_INFO].hWnd, LB_GETCOUNT, (WPARAM)0, (LPARAM)0 );
 		SendMessage( Object[ID_INFO].hWnd, LB_SETCURSEL, num-1, (LPARAM)0 );
 	}
@@ -345,29 +375,46 @@ void AddProgress( const char* str ){
 
 void DisplayResult( THINK_INFO *info ){
 /**************************************************************
-èÓïÒï\é¶
+ÊÉÖÂ†±Ë°®Á§∫
 **************************************************************/
-	char str[32];
+	TCHAR str[32];
 
-	wsprintf( str, "%d", (int)info->value );
+#ifdef _WIN64
+	swprintf( str, sizeof(str), L"%d", (int)info->value );
 	SetWindowText( Object[ID_VALUE].hWnd, str );
 
-	wsprintf( str, "%d", (int)info->node );
+	swprintf( str, sizeof(str), L"%d", (int)info->node );
 	SetWindowText( Object[ID_NODE].hWnd, str );
 
-	wsprintf( str, "%d", (int)info->nps );
+	swprintf( str, sizeof(str), L"%d", (int)info->nps );
 	SetWindowText( Object[ID_NPS].hWnd, str );
 
-	wsprintf( str, "%d", (int)info->depth );
+	swprintf( str, sizeof(str), L"%d", (int)info->depth );
 	SetWindowText( Object[ID_DEPTH].hWnd, str );
 
-	wsprintf( str, "%d", (int)( info->msec / 1000 ) );
+	swprintf( str, sizeof(str), L"%d", (int)( info->msec / 1000 ) );
 	SetWindowText( Object[ID_OUT_TIME].hWnd, str );
+#else
+	wsprintf( str, L"%d", (int)info->value );
+	SetWindowText( Object[ID_VALUE].hWnd, str );
+
+	wsprintf( str, L"%d", (int)info->node );
+	SetWindowText( Object[ID_NODE].hWnd, str );
+
+	wsprintf( str, L"%d", (int)info->nps );
+	SetWindowText( Object[ID_NPS].hWnd, str );
+
+	wsprintf( str, L"%d", (int)info->depth );
+	SetWindowText( Object[ID_DEPTH].hWnd, str );
+
+	wsprintf( str, L"%d", (int)( info->msec / 1000 ) );
+	SetWindowText( Object[ID_OUT_TIME].hWnd, str );
+#endif
 }
 
 void DisplayBook( int num, Moves& moves ){
 /**************************************************************
-íËê’éËÇï\é¶
+ÂÆöË∑°Êâã„ÇíË°®Á§∫
 **************************************************************/
 	int i;
 

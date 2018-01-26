@@ -1,4 +1,4 @@
-/* gencheck.cpp
+﻿/* gencheck.cpp
  * R.Kubo 2008-2010
  * 王手生成
  */

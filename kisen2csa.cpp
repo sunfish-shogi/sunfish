@@ -1,4 +1,4 @@
-/* kisen2csa.cpp
+﻿/* kisen2csa.cpp
  * R.Kubo 2011-2012
  * 棋泉 => CSA 変換
  */

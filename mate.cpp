@@ -1,4 +1,4 @@
-/* mate.cpp
+﻿/* mate.cpp
  * R.Kubo 2011-2012
  * 詰み探索ルーチン
  */

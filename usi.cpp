@@ -1,5 +1,5 @@
-/* usi2csa.cpp
- * USIƒvƒƒgƒRƒ‹
+ï»¿/* usi2csa.cpp
+ * USIãƒ—ãƒ­ãƒˆã‚³ãƒ«
  */
 
 #include <windows.h>
@@ -137,7 +137,7 @@ void dividePath( char *path, char *name ){
 	path[n+1] = '\0';
 }
 
-// ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğexe‚ÌˆÊ’u‚Éİ’è
+// ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’exeã®ä½ç½®ã«è¨­å®š
 bool setCurrentDirectory(){
 	char new_curr[1024];
 	GetModuleFileName( NULL, new_curr, sizeof(new_curr) );
@@ -173,7 +173,7 @@ char* getNextToken( char* p ){
 bool setMove( MOVE& move, KOMA sengo, const char* p ){
 	if( strlen( p ) < 4 ){ return false; }
 
-	// ˆÚ“®Œ³
+	// ç§»å‹•å…ƒ
 	if( p[0] >= '1' && p[0] <= '9' ){
 		move.from = BanAddr( p[0]-'0', p[1]-'a'+1);
 	}
@@ -181,7 +181,7 @@ bool setMove( MOVE& move, KOMA sengo, const char* p ){
 		move.from = DAI + sengo + a2p[p[0]-'A'];
 	}
 
-	// ˆÚ“®æ
+	// ç§»å‹•å…ˆ
 	move.to = BanAddr( p[2]-'0', p[3]-'a'+1 );
 	move.nari = p[4] == '+' ? 1 : 0;
 
@@ -228,23 +228,31 @@ void usi_end(){
 	wconf.Write();
 }
 
+#ifdef _WIN64
+static VOID CALLBACK timelimit( UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2 ){
+#else
 static VOID CALLBACK timelimit( UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2 ){
+#endif
 /************************************************
-§ŒÀŠÔŒo‰ß
+åˆ¶é™æ™‚é–“çµŒé
 ************************************************/
-	chudan = 1; // ‘Å‚¿Ø‚èƒtƒ‰ƒO
+	chudan = 1; // æ‰“ã¡åˆ‡ã‚Šãƒ•ãƒ©ã‚°
 }
 
+#ifdef _WIN64
+static VOID CALLBACK timelimit2( UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2 ){
+#else
 static VOID CALLBACK timelimit2( UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2 ){
+#endif
 /************************************************
-§ŒÀŠÔŒo‰ß
+åˆ¶é™æ™‚é–“çµŒé
 ************************************************/
-	chudanDfPn = 1; // ‘Å‚¿Ø‚èƒtƒ‰ƒO(‹l‚İ’Tõ)
+	chudanDfPn = 1; // æ‰“ã¡åˆ‡ã‚Šãƒ•ãƒ©ã‚°(è©°ã¿æ¢ç´¢)
 }
 
 unsigned __stdcall ponder( LPVOID p ){
 /************************************************
-‘Šè”Ô‚Å’Tõ‚ğ‚·‚éƒXƒŒƒbƒh
+ç›¸æ‰‹ç•ªã§æ¢ç´¢ã‚’ã™ã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰
 ************************************************/
 	THINK_INFO info;
 
@@ -259,7 +267,7 @@ unsigned __stdcall ponder( LPVOID p ){
 
 unsigned __stdcall think( LPVOID p ){
 /************************************************
-vlƒXƒŒƒbƒh
+æ€è€ƒã‚¹ãƒ¬ãƒƒãƒ‰
 ************************************************/
 	Moves moves;
 	MOVE move;
@@ -271,7 +279,7 @@ unsigned __stdcall think( LPVOID p ){
 
 	memset( &info, 0, sizeof(THINK_INFO) );
 
-	// ŠÔ§ŒÀ
+	// æ™‚é–“åˆ¶é™
 	if( pshogi->GetSengo() == SENTE ){
 		limit += min( btime, btime / 20 + 1 );
 	}
@@ -279,19 +287,19 @@ unsigned __stdcall think( LPVOID p ){
 		limit += min( wtime, wtime / 20 + 1 );
 	}
 
-	// ŠÔ–³§ŒÀ
+	// æ™‚é–“ç„¡åˆ¶é™
 	if( infinite ){ limit = 0; }
 
-	// ’èÕ‚ğ’²‚×‚éB
+	// å®šè·¡ã‚’èª¿ã¹ã‚‹ã€‚
 	if( pbook != NULL ){
 		ret = pbook->GetMove( pshogi, move );
 	}
 
-	// ‹l‚İ’Tõ
+	// è©°ã¿æ¢ç´¢
 	if( ret == 0 ){
 		if( limit > 0 ){
 			msec_mate = limit / 10;
-			if( msec_mate > 1000 ){ msec_mate = 1000; } // Å‘å1•b
+			if( msec_mate > 1000 ){ msec_mate = 1000; } // æœ€å¤§1ç§’
 			tid = timeSetEvent( msec_mate, 10, timelimit2, 0, TIME_ONESHOT );
 		}
 		ret = pthink->DfPnSearch( pshogi, &move, NULL, &info, &chudanDfPn );
@@ -299,7 +307,7 @@ unsigned __stdcall think( LPVOID p ){
 		if( limit > 0 ){ timeKillEvent( tid ); }
 	}
 
-	// ’Êí’Tõ
+	// é€šå¸¸æ¢ç´¢
 	if( ret == 0 ){
 		if( limit > 0 ){
 			tid = timeSetEvent( limit - msec_mate, 10, timelimit, 0, TIME_ONESHOT );
@@ -309,12 +317,12 @@ unsigned __stdcall think( LPVOID p ){
 		if( limit > 0 ){ timeKillEvent( tid ); }
 	}
 
-	// infinite‚Ìê‡Astop‚ğ‘Ò‚ÂB
+	// infiniteã®å ´åˆã€stopã‚’å¾…ã¤ã€‚
 	if( infinite ){
 		while( !stop ){ Sleep( 0 ); }
 	}
 
-	// Œ‹‰Ê‚ğ•Ô‚·B
+	// çµæœã‚’è¿”ã™ã€‚
 	if( ret != 0 && presign->good( info ) ){
 		char mstr[6];
 
@@ -363,7 +371,7 @@ unsigned __stdcall think( LPVOID p ){
 
 unsigned __stdcall mate( LPVOID p ){
 /************************************************
-‹l‚İ’TõƒXƒŒƒbƒh
+è©°ã¿æ¢ç´¢ã‚¹ãƒ¬ãƒƒãƒ‰
 ************************************************/
 	//MOVE move;
 	Moves moves;
@@ -373,7 +381,7 @@ unsigned __stdcall mate( LPVOID p ){
 
 	memset( &info, 0, sizeof(THINK_INFO) );
 
-	// ‹l‚İ’Tõ
+	// è©°ã¿æ¢ç´¢
 	if( !infinite ){
 		tid = timeSetEvent( mate_limit, 10, timelimit2, 0, TIME_ONESHOT );
 	}
@@ -382,7 +390,7 @@ unsigned __stdcall mate( LPVOID p ){
 		timeKillEvent( tid );
 	}
 
-	// Œ‹‰Ê‚ğ•Ô‚·B
+	// çµæœã‚’è¿”ã™ã€‚
 	if( ret != 0 ){
 		char mstr[6];
 
@@ -397,7 +405,7 @@ unsigned __stdcall mate( LPVOID p ){
 		MUTEX_UNLOCK;
 	}
 	else{
-		// –{“–‚ÍŠÔØ‚ê‚Ìê‡‚Écheckmate timeout‚ğ•Ô‚·B
+		// æœ¬å½“ã¯æ™‚é–“åˆ‡ã‚Œã®å ´åˆã«checkmate timeoutã‚’è¿”ã™ã€‚
 		MUTEX_LOCK;
 		cout << "checkmate nomate\n";
 		cout.flush();
@@ -450,7 +458,7 @@ void getBan( KOMA* _ban, const char* p ){
 	KOMA nari = 0;
 	KOMA* ban = _ban + BAN_OFFSET;
 
-	// ”Õ–Ê
+	// ç›¤é¢
 	for( i = 0 ; i < 16*13 ; i++ ){
 		_ban[i] = ConstData::_empty[i];
 	}
@@ -480,29 +488,29 @@ void getBan( KOMA* _ban, const char* p ){
 }
 
 KOMA getSengo( const char* p, KOMA def_sengo ){
-	// è”Ô
+	// æ‰‹ç•ª
 	if     ( strcmp( p, "b" ) == 0 ){ return SENTE; }
 	else if( strcmp( p, "w" ) == 0 ){ return GOTE; }
 	return def_sengo;
 }
 
 void getDai( int* dai, const char* p ){
-	// ‚¿‹î
+	// æŒã¡é§’
 	int i;
 	int num = 0;
 
 	memset( dai, 0, 64 * sizeof(dai[0]) );
 	for( i = 0 ; p[i] != '\0' ; i++ ){
-		// ”š => ‹î‚Ì–‡”
+		// æ•°å­— => é§’ã®æšæ•°
 		if     ( p[i] >= '0' && p[i] <= '9' ){
 			num = num * 10 + ( p[i] - '0' );
 		}
-		// ‘å•¶š => æè‚Ì‹î
+		// å¤§æ–‡å­— => å…ˆæ‰‹ã®é§’
 		else if( p[i] >= 'A' && p[i] <= 'Z' ){
 			dai[a2p[p[i]-'A']|SENTE] += ( num == 0 ? 1 : num );
 			num = 0;
 		}
-		// ¬•¶š => Œãè‚Ì‹î
+		// å°æ–‡å­— => å¾Œæ‰‹ã®é§’
 		else if( p[i] >= 'a' && p[i] <= 'z' ){
 			dai[a2p[p[i]-'a']|GOTE ] += ( num == 0 ? 1 : num );
 			num = 0;
@@ -537,7 +545,7 @@ bool getOptionValueBool( char* p, bool* out ){
 	return false;
 }
 
-// USIƒvƒƒgƒRƒ‹
+// USIãƒ—ãƒ­ãƒˆã‚³ãƒ«
 bool usi(){
 	bool ready = false;
 
@@ -549,14 +557,14 @@ bool usi(){
 		chomp( line );
 		if( feof( stdin ) ){ return false; }
 
-		// ‰‚ß‚Ìƒg[ƒNƒ“
+		// åˆã‚ã®ãƒˆãƒ¼ã‚¯ãƒ³
 		p = getFirstToken( line );
 		if( p == NULL ){ continue; }
 
 		// quit
 		if     ( strcmp( p, "quit" ) == 0 ){
 			shogi_end();
-			break; // ³íI—¹
+			break; // æ­£å¸¸çµ‚äº†
 		}
 		// usi
 		else if( strcmp( p, "usi" ) == 0 ){
@@ -585,14 +593,14 @@ bool usi(){
 						Hash::SetSize( HashSize::MBytesToPow2( hash_mbytes, thread_num ) );
 					}
 				}
-				// ƒXƒŒƒbƒh”
+				// ã‚¹ãƒ¬ãƒƒãƒ‰æ•°
 				else if( strcmp( p, "NumberOfThreads" ) == 0 ){
 					if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 					if( getOptionValueInt( p, &thread_num ) ){
 						if( pthink ){ pthink->SetNumberOfThreads( thread_num ); }
 					}
 				}
-				// “Š—¹‚Ì‚µ‚«‚¢’l
+				// æŠ•äº†ã®ã—ãã„å€¤
 				else if( strcmp( p, "ResignValue" ) == 0 ){
 					if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 					if( getOptionValueInt( p, &resign_value ) ){
@@ -619,16 +627,16 @@ bool usi(){
 		}
 		// position
 		else if( strcmp( p, "position" ) == 0 ){
-			// ƒXƒŒƒbƒh‚ÌI—¹‘Ò‚¿B
+			// ã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†å¾…ã¡ã€‚
 			THINK_CLOSE;
 			PONDER_CLOSE;
 			MATE_CLOSE;
 
 			if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 
-			// •½è‚Ì‰Šú‹Ç–Ê
+			// å¹³æ‰‹ã®åˆæœŸå±€é¢
 			if( strcmp( p, "startpos" ) == 0 ){
-				// w‚µè
+				// æŒ‡ã—æ‰‹
 				pshogi->SetBan( HIRATE );
 			}
 			else if( strcmp( p, "sfen" ) == 0 ){
@@ -637,32 +645,32 @@ bool usi(){
 				KOMA sengo = SENTE;
 				int i;
 
-				// ”Õ–Ê
+				// ç›¤é¢
 				for( i = 0 ; i < sizeof(ban)/sizeof(ban[0]) ; i++ ){
 					ban[i] = ConstData::_empty[i];
 				}
 				if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 				getBan( ban, p );
 
-				// è”Ô
+				// æ‰‹ç•ª
 				if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 				sengo = getSengo( p, sengo );
 
-				// ‚¿‹î
+				// æŒã¡é§’
 				if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 				getDai( dai, p );
 
-				// è” «ŠûŠ‚Íí‚É1
+				// æ‰‹æ•° å°†æ£‹æ‰€ã¯å¸¸ã«1
 				if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 
-				// ‹Ç–Ê‚ÌƒZƒbƒg
+				// å±€é¢ã®ã‚»ãƒƒãƒˆ
 				pshogi->SetBan( ban, dai, sengo );
 			}
 			else{
 				return false;
 			}
 
-			// Šû•ˆ
+			// æ£‹è­œ
 			if( ( p = getNextToken( p ) ) == NULL ){ continue; }
 			if( strcmp( p, "moves" ) == 0 ){
 				while( ( p = getNextToken( p ) ) != NULL ){
@@ -683,56 +691,56 @@ bool usi(){
 			bool is_mate_search = false;
 			infinite = false;
 
-			// ƒXƒŒƒbƒh‚ÌI—¹‘Ò‚¿B
+			// ã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†å¾…ã¡ã€‚
 			THINK_CLOSE;
 			PONDER_CLOSE;
 			MATE_CLOSE;
 
 			while( ( p = getNextToken( p ) ) != NULL ){
-				// æè‚Ì‚¿ŠÔ
+				// å…ˆæ‰‹ã®æŒã¡æ™‚é–“
 				if     ( strcmp( p, "btime" ) == 0 ){
 					if( ( p = getNextToken( p ) ) == NULL ){ break; }
 					btime = strtol( p, NULL, 10 );
 				}
-				// Œãè‚Ì‚¿ŠÔ
+				// å¾Œæ‰‹ã®æŒã¡æ™‚é–“
 				else if( strcmp( p, "wtime" ) == 0 ){
 					if( ( p = getNextToken( p ) ) == NULL ){ break; }
 					wtime = strtol( p, NULL, 10 );
 				}
-				// •b“Ç‚İ
+				// ç§’èª­ã¿
 				else if( strcmp( p, "byoyomi" ) == 0 ){
 					if( ( p = getNextToken( p ) ) == NULL ){ break; }
 					byoyomi = strtol( p, NULL, 10 );
 				}
-				// ŠÔ–³§ŒÀ
+				// æ™‚é–“ç„¡åˆ¶é™
 				else if( strcmp( p, "infinite" ) == 0 ){
 					infinite = true;
 				}
-				// ‹l«Šû
+				// è©°å°†æ£‹
 				else if( strcmp( p, "mate" ) == 0 ){
 					is_mate_search = true;
 					if( ( p = getNextToken( p ) ) == NULL ){ break; }
-					// ŠÔ–³§ŒÀ
+					// æ™‚é–“ç„¡åˆ¶é™
 					if( strcmp( p, "infinite" ) == 0 ){
 						infinite = true;
 					}
-					// ŠÔ§ŒÀ
+					// æ™‚é–“åˆ¶é™
 					else{
 						mate_limit = strtol( p, NULL, 10 );
 					}
 				}
 			}
 
-			// vlŠJn
+			// æ€è€ƒé–‹å§‹
 			if( ready ){
 				stop = false;
 
-				// ‹l‚İ’Tõ
+				// è©°ã¿æ¢ç´¢
 				if( is_mate_search ){
 					chudanDfPn = 0;
 					hMate = (HANDLE)_beginthreadex( NULL, 0, mate, (LPVOID)NULL, 0, NULL );
 				}
-				// ’Êí’Tõ
+				// é€šå¸¸æ¢ç´¢
 				else{
 					chudan = 0;
 					chudanDfPn = 0;

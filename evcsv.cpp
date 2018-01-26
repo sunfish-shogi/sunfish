@@ -1,4 +1,4 @@
-/* evscv.cpp
+﻿/* evscv.cpp
  * R.Kubo 2008-2010
  * 重みベクトルの情報をcsv形式で出力
  */

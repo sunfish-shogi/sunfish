@@ -1,6 +1,6 @@
-/* wconf.h
+я╗┐/* wconf.h
  * R.Kubo 2011-2012
- * wconfР▌ТшГtГ@ГCГЛВ╠К╟ЧЭ
+ * wconfшинхоЪуГХуВбуВдуГлуБочобчРЖ
  */
 
 #ifndef __WCONF__

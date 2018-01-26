@@ -1,4 +1,4 @@
-/* debug.cpp
+﻿/* debug.cpp
  * R.Kubo 2011-2012
  * デバッグ用
  */

@@ -1,4 +1,4 @@
-/* shogi2.cpp
+﻿/* shogi2.cpp
  * R.Kubo 2010-2012
  * Shogiクラスに局面評価を追加したShogiEvalクラス
  */

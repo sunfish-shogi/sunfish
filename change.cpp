@@ -1,4 +1,4 @@
-/* change.cpp
+﻿/* change.cpp
  * 一部のパラメータを書き換える。
  */
 

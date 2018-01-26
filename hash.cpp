@@ -1,4 +1,4 @@
-/* hash.cpp
+﻿/* hash.cpp
  * R.Kubo 2008-2012
  * 局面のハッシュ
  */

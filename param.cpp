@@ -1,4 +1,4 @@
-/* param.cpp
+﻿/* param.cpp
  * R.Kubo 2008-2010
  * 評価パラメータ
  */

@@ -1,4 +1,4 @@
-/* learn2.cpp
+﻿/* learn2.cpp
  * R.Kubo 2010
  * 機械学習(Averaged Perceptron)
  */
