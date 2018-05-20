@@ -327,13 +327,13 @@ unsigned __stdcall think( LPVOID p ){
 		char mstr[6];
 
 		if     ( info.value >= VMAX ){
-			cout << "info score mate +\n";
+			cout << "info nps " << info.nps << " score mate +\n";
 		}
 		else if( info.value <= VMIN ){
-			cout << "info score mate -\n";
+			cout << "info nps " << info.nps << " score mate -\n";
 		}
 		else{
-			cout << "info score cp " << (int)info.value << '\n';
+			cout << "info nps " << info.nps << " score cp " << (int)info.value << '\n';
 		}
 
 		setMoveString( mstr, sizeof(mstr), move );
