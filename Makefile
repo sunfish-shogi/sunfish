@@ -15,6 +15,7 @@ DEPENDS2=$(patsubst %.cpp,%.d,$(SRC2))
 
 # Compile option
 override OPTN+= -lrt
+override OPTN+= -pthread
 override CFLAGS+= -Wall
 override CFLAGS+= -W
 #override CFLAGS+= -O1
