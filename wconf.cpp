@@ -15,7 +15,7 @@ bool WConf::Read(){
 		char* p = strchr( str, '=' );
 		if( p != NULL ){
 			*p = '\0';
-			conf.push_back( Data( str, p+1 ) );
+			conf.push_back( Data( str, (const char*)(p+1) ) );
 		}
 	}
 	fin.close();

@@ -179,13 +179,13 @@ void CreateChildWindow( HWND hWnd ){
 	swprintf( buf, sizeof(buf), L"%d", hash_mbytes );
 	SetWindowText( Object[ID_HASH].hWnd, buf );
 #else
-	wsprintf( buf, L"%d", limit );
+	wsprintf( buf, "%d", limit );
 	SetWindowText( Object[ID_IN_TIME].hWnd, buf );
-	wsprintf( buf, L"%d", thread_num );
+	wsprintf( buf, "%d", thread_num );
 	SetWindowText( Object[ID_THREADS].hWnd, buf );
-	wsprintf( buf, L"%d", resign_value );
+	wsprintf( buf, "%d", resign_value );
 	SetWindowText( Object[ID_RESIGN].hWnd, buf );
-	wsprintf( buf, L"%d", hash_mbytes );
+	wsprintf( buf, "%d", hash_mbytes );
 	SetWindowText( Object[ID_HASH].hWnd, buf );
 #endif
 	SendMessage( Object[ID_PONDER].hWnd, BM_SETCHECK, (WPARAM)bPonder, 0 );
@@ -395,19 +395,19 @@ void DisplayResult( THINK_INFO *info ){
 	swprintf( str, sizeof(str), L"%d", (int)( info->msec / 1000 ) );
 	SetWindowText( Object[ID_OUT_TIME].hWnd, str );
 #else
-	wsprintf( str, L"%d", (int)info->value );
+	wsprintf( str, "%d", (int)info->value );
 	SetWindowText( Object[ID_VALUE].hWnd, str );
 
-	wsprintf( str, L"%d", (int)info->node );
+	wsprintf( str, "%d", (int)info->node );
 	SetWindowText( Object[ID_NODE].hWnd, str );
 
-	wsprintf( str, L"%d", (int)info->nps );
+	wsprintf( str, "%d", (int)info->nps );
 	SetWindowText( Object[ID_NPS].hWnd, str );
 
-	wsprintf( str, L"%d", (int)info->depth );
+	wsprintf( str, "%d", (int)info->depth );
 	SetWindowText( Object[ID_DEPTH].hWnd, str );
 
-	wsprintf( str, L"%d", (int)( info->msec / 1000 ) );
+	wsprintf( str, "%d", (int)( info->msec / 1000 ) );
 	SetWindowText( Object[ID_OUT_TIME].hWnd, str );
 #endif
 }

@@ -50,7 +50,7 @@ public:
 	void setValueInt( const char* key, int value ){
 		char str[16];
 		sprintf( str, "%d", value );
-		setValue( key, str );
+		setValue( key, (const char*)str );
 	}
 };
 
