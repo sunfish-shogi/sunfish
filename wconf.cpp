@@ -1,6 +1,6 @@
-/* wconf.cpp
+ï»¿/* wconf.cpp
  * R.Kubo 2011-2012
- * wconfİ’èƒtƒ@ƒCƒ‹‚ÌŠÇ—
+ * wconfè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã®ç®¡ç†
  */
 
 #include "wconf.h"
@@ -15,7 +15,7 @@ bool WConf::Read(){
 		char* p = strchr( str, '=' );
 		if( p != NULL ){
 			*p = '\0';
-			conf.push_back( Data( str, p+1 ) );
+			conf.push_back( Data( str, (const char*)(p+1) ) );
 		}
 	}
 	fin.close();

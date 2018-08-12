@@ -1,4 +1,4 @@
-/* string.cpp
+﻿/* string.cpp
  * R.Kubo 2010
  * 文字列処理Stringクラス
  */

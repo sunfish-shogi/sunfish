@@ -1,4 +1,4 @@
-/* evaluate.cpp
+﻿/* evaluate.cpp
  * R.Kubo 2008-2010
  * 局面評価
  */

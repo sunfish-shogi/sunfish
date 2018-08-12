@@ -1,6 +1,6 @@
-/* wconf.h
+ï»¿/* wconf.h
  * R.Kubo 2011-2012
- * wconfİ’èƒtƒ@ƒCƒ‹‚ÌŠÇ—
+ * wconfè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã®ç®¡ç†
  */
 
 #ifndef __WCONF__
@@ -50,7 +50,7 @@ public:
 	void setValueInt( const char* key, int value ){
 		char str[16];
 		sprintf( str, "%d", value );
-		setValue( key, str );
+		setValue( key, (const char*)str );
 	}
 };
 

@@ -1,4 +1,4 @@
-/* learn.cpp
+﻿/* learn.cpp
  * R.Kubo 2008-2012
  * 機械学習
  */

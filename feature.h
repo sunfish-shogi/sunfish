@@ -1,4 +1,4 @@
-/* feature.cpp
+﻿/* feature.cpp
  * R.Kubo 2010-2012
  * 局面の特徴抽出
  */

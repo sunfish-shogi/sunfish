@@ -1,4 +1,4 @@
-/* evaldiff.cpp
+﻿/* evaldiff.cpp
  * R.Kubo 2012
  * 局面評価の差分計算
  */

@@ -1,4 +1,4 @@
-/* thread.cpp
+﻿/* thread.cpp
  * R.Kubo 2011-2012
  * スレッドレベル並列化
  */

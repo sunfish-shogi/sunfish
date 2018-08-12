@@ -1,4 +1,4 @@
-/* match.cpp
+﻿/* match.cpp
  * R.Kubo 2008-2010
  * 将棋の対局を行なうMatchクラスのメンバ
  */

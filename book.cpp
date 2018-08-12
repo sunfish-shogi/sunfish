@@ -1,4 +1,4 @@
-/* book.cpp
+﻿/* book.cpp
  * R.Kubo 2008-2012
  * 将棋の定跡
  */

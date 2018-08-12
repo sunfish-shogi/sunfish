@@ -1,4 +1,4 @@
-/* FileList.cpp
+﻿/* FileList.cpp
  * R.Kubo 2010
  * ファイルを列挙するFileListクラス
  */
@@ -24,7 +24,7 @@ int FileList::Enumerate( const char* directory, const char* extension ){
 
 #ifdef WIN32
 	HANDLE hFind;
-	WIN32_FIND_DATA fd;
+	WIN32_FIND_DATAA fd;
 #else
 	DIR *pdir;
 	struct dirent *pent;
@@ -54,7 +54,7 @@ int FileList::Enumerate( const char* directory, const char* extension ){
 	if( 1 < ext.length() )
 		fname += extension;
 
-	hFind = FindFirstFile( fname.c_str(), &fd );
+	hFind = FindFirstFileA( fname.c_str(), &fd );
 
 	if( hFind == INVALID_HANDLE_VALUE ){
 		cerr << "There are no files!..["
@@ -104,7 +104,7 @@ int FileList::Enumerate( const char* directory, const char* extension ){
 
 #ifdef WIN32
 		// 次のファイル
-		if( !FindNextFile( hFind, &fd ) ){
+		if( !FindNextFileA( hFind, &fd ) ){
 			// ハンドルのクローズ
 			FindClose( hFind );
 			break;

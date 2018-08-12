@@ -1,4 +1,4 @@
-/* generate.cpp
+﻿/* generate.cpp
  * R.Kubo 2008-2010
  * 合法手生成
  */

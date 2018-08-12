@@ -1,4 +1,4 @@
-/* rand.h
+﻿/* rand.h
  * 乱数生成器
  * init_gen_rand()を呼んでから使用すること
  */

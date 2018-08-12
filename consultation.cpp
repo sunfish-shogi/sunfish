@@ -1,4 +1,4 @@
-/* consultation.cpp
+﻿/* consultation.cpp
  * 合議アルゴリズム
  */
 

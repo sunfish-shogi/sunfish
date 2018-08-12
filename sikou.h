@@ -1,18 +1,18 @@
-/* sikou.h
+Ôªø/* sikou.h
  * R.Kubo 2009-2010
- * è´ä˚ÇÃévçlÉãÅ[É`Éì
+ * Â∞ÜÊ£ã„ÅÆÊÄùËÄÉ„É´„Éº„ÉÅ„É≥
  */
 
 #ifndef _SIKOU_
 #define _SIKOU_
 
-// ÉtÉHÉìÉgÉTÉCÉY
+// „Éï„Ç©„É≥„Éà„Çµ„Ç§„Ç∫
 #define FONT_SIZE			14
 
-// ÉXÉyÅ[ÉX
+// „Çπ„Éö„Éº„Çπ
 #define SPACE				5
 
-// ÉEÉBÉìÉhÉEÉXÉ^ÉCÉã
+// „Ç¶„Ç£„É≥„Éâ„Ç¶„Çπ„Çø„Ç§„É´
 #define ST_STATIC			( WS_CHILD | WS_VISIBLE | ES_LEFT )
 #define ST_EDIT				( WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP | ES_RIGHT )
 #define ST_LEDIT			( WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY )
@@ -20,7 +20,7 @@
 #define ST_EDIT_R			( ST_EDIT | ES_READONLY )
 #define ST_LIST				( LBS_NOINTEGRALHEIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY )
 
-// ÉTÉCÉY
+// „Çµ„Ç§„Ç∫
 #define STATIC_LEFT			SPACE
 #define STATIC_TOP(n)		( EDIT_TOP(n) + 1 )
 #define STATIC_HEIGHT		( FONT_SIZE + 2 )
@@ -39,7 +39,7 @@
 
 struct OBJECT{
 	HWND hWnd;
-	char ClassName[32];
+	TCHAR ClassName[32];
 	DWORD style;
 	int left;
 	int top;
@@ -50,14 +50,14 @@ struct OBJECT{
 	int widthW;
 	int heightW;
 	int change;
-	char DefaultString[128];
+	TCHAR DefaultString[128];
 };
 
-// ÉEÉBÉìÉhÉEÉTÉCÉY
+// „Ç¶„Ç£„É≥„Éâ„Ç¶„Çµ„Ç§„Ç∫
 #define WINDOW_SIZE_X		( EDIT_LEFT + EDIT_WIDTH + SPACE )
 #define WINDOW_SIZE_Y(n)	( EDIT_TOP(n) + LEDIT_HEIGHT + SPACE )
 
-// ÉèÉCÉhï\é¶í«â¡ÉTÉCÉY
+// „ÉØ„Ç§„ÉâË°®Á§∫ËøΩÂä†„Çµ„Ç§„Ç∫
 #define WINDOW_WIDE_X		( WINDOW_SIZE_X )
 #define STATIC_LEFT_W		( STATIC_LEFT + WINDOW_WIDE_X )
 #define EDIT_LEFT_W			( EDIT_LEFT + WINDOW_WIDE_X )

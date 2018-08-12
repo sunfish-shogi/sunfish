@@ -1,4 +1,4 @@
-/* match.h
+﻿/* match.h
  * R.Kubo 2008-2012
  * 将棋の対局を行なうMatchクラス
  */
@@ -1453,7 +1453,9 @@ private:
 	static int lim_iflag;
 public:
 	static void sigint( int );
-#ifdef WIN32
+#if defined(WIN32) && defined(_WIN64)
+	static VOID CALLBACK sigtime( UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2 );
+#elif defined(WIN32)
 	static VOID CALLBACK sigtime( UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2 );
 #else
 	static void sigtime( int );

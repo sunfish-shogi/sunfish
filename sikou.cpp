@@ -1,6 +1,6 @@
-/* sikou.cpp
+ï»¿/* sikou.cpp
  * R.Kubo 2009-2010
- * «Šû‚Ìvlƒ‹[ƒ`ƒ“
+ * å°†æ£‹ã®æ€è€ƒãƒ«ãƒ¼ãƒãƒ³
  */
 
 #include <windows.h>
@@ -12,28 +12,28 @@
 #include "sikou.h"
 #include "wconf.h"
 
-// À•W•ÏŠ·
+// åº§æ¨™å¤‰æ›
 // CSA -> Sunfish 
 #define CSA2SUN(a)		(BanAddr(((a)-1)%9+1,((a)-1)/9+1))
 // Sunfish -> CSA 
 #define SUN2CSA(a)		(Addr2X(a)+(Addr2Y(a)-1)*9)
 
-// ‹Ç–Ê
+// å±€é¢
 ShogiEval* pshogi = NULL;
 Think* pthink = NULL;
 Book*  pbook = NULL;
 ResignController* presign = NULL;
 
-// vl’†ƒtƒ‰ƒO
+// æ€è€ƒä¸­ãƒ•ãƒ©ã‚°
 static int sikou_flag = 0;
 
-// ’†’fƒtƒ‰ƒO
+// ä¸­æ–­ãƒ•ãƒ©ã‚°
 static int chudan = 0;
 static int chudanDfPn = 0;
 static int chudanPonder = 0;
 static int*	chudan_flag = NULL;
 
-// ‘Šè”Ôvl
+// ç›¸æ‰‹ç•ªæ€è€ƒ
 HANDLE g_hPonder = INVALID_HANDLE_VALUE;
 
 // window.cpp
@@ -55,7 +55,7 @@ BOOL bResult = TRUE;
 BOOL bPonder = TRUE;
 BOOL bWide = FALSE;
 
-// w‚µè—ñ‹“—p
+// æŒ‡ã—æ‰‹åˆ—æŒ™ç”¨
 Moves moves;
 
 static long mutex;
@@ -71,22 +71,22 @@ while( mutex != 0 ) \
 } }while( 0 )
 #define MUTEX_UNLOCK		do{ mutex = 0; }while( 0 )
 
-// ’Tõî•ñ‘—M—p
+// æ¢ç´¢æƒ…å ±é€ä¿¡ç”¨
 typedef void (*FUNC_INF)( int, int, int, int, int, int );
 static FUNC_INF func_inf = NULL;
 
 static const char sjis_kansuji[][3] = {
-	"ˆê", "“ñ", "O", "l", "ŒÜ", "˜Z", "µ", "”ª", "‹ã"
+	"ä¸€", "äºŒ", "ä¸‰", "å››", "äº”", "å…­", "ä¸ƒ", "å…«", "ä¹"
 };
 
 static const char sjis_koma[][5] = {
-	"•à", "",   "Œj",   "‹â",   "‹à", "Šp", "”ò", "‹Ê",
-	"‚Æ", "¬", "¬Œj", "¬‹â", "",   "”n", "—³",
+	"æ­©", "é¦™",   "æ¡‚",   "éŠ€",   "é‡‘", "è§’", "é£›", "ç‰",
+	"ã¨", "æˆé¦™", "æˆæ¡‚", "æˆéŠ€", "",   "é¦¬", "ç«œ",
 };
 
 string Shogi::GetStrMoveSJIS( const MOVE& move, bool eol ){
 /************************************************
-w‚µè‚ğ•¶š—ñ‚É•ÏŠ·B
+æŒ‡ã—æ‰‹ã‚’æ–‡å­—åˆ—ã«å¤‰æ›ã€‚
 ************************************************/
 	ostringstream str;
 
@@ -107,12 +107,12 @@ string Shogi::GetStrMoveSJIS( const MOVE& move, bool eol ){
 		str << sjis_koma[move.koma-1];
 
 	if( move.from & DAI ){
-		// ‚¿‹î‚ğ‘Å‚Âê‡
-		str << "‘Å ";
+		// æŒã¡é§’ã‚’æ‰“ã¤å ´åˆ
+		str << "æ‰“ ";
 	}
 	else{
-		// ”Õã‚Ì‹î‚ğ“®‚©‚·ê‡
-		if( move.nari ){ str << "¬"; }
+		// ç›¤ä¸Šã®é§’ã‚’å‹•ã‹ã™å ´åˆ
+		if( move.nari ){ str << "æˆ"; }
 
 		str << '(';
 		str << Addr2X(move.from);
@@ -143,11 +143,11 @@ dispatch
 extern "C"
 BOOL WINAPI DllMain( HINSTANCE hInst, DWORD fdwReason, PVOID pvReserved ){
 /**************************************************************
-ƒƒCƒ“
+ãƒ¡ã‚¤ãƒ³
 **************************************************************/
 	switch( fdwReason ){
 	case DLL_PROCESS_ATTACH:
-		// DLL“Ç‚İ‚İ
+		// DLLèª­ã¿è¾¼ã¿æ™‚
 		init_gen_rand( (unsigned int)time( NULL ) );
 
 		wconf.Read();
@@ -176,7 +176,7 @@ BOOL WINAPI DllMain( HINSTANCE hInst, DWORD fdwReason, PVOID pvReserved ){
 
 		break;
 	case DLL_PROCESS_DETACH:
-		// DLL‰ğ•ú
+		// DLLè§£æ”¾æ™‚
 		chudan = 1;
 		chudanDfPn = 1;
 		while( sikou_flag ){
@@ -184,7 +184,7 @@ BOOL WINAPI DllMain( HINSTANCE hInst, DWORD fdwReason, PVOID pvReserved ){
 			Sleep( 10 );
 		}
 
-		// ‘Šè”ÔvlƒXƒŒƒbƒh‚ÌI—¹‚ğ‘Ò‚ÂB
+		// ç›¸æ‰‹ç•ªæ€è€ƒã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤ã€‚
 		if( g_hPonder != INVALID_HANDLE_VALUE ){
 			chudanPonder = 1;
 			WaitForSingleObject( g_hPonder, INFINITE );
@@ -229,23 +229,31 @@ BOOL WINAPI DllMain( HINSTANCE hInst, DWORD fdwReason, PVOID pvReserved ){
 	return TRUE;
 }
 
+#ifdef _WIN64
+static VOID CALLBACK timelimit( UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2 ){
+#else
 static VOID CALLBACK timelimit( UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2 ){
+#endif
 /************************************************
-§ŒÀŠÔŒo‰ß
+åˆ¶é™æ™‚é–“çµŒé
 ************************************************/
-	chudan = 1; // ‘Å‚¿Ø‚èƒtƒ‰ƒO
+	chudan = 1; // æ‰“ã¡åˆ‡ã‚Šãƒ•ãƒ©ã‚°
 }
 
+#ifdef _WIN64
+static VOID CALLBACK timelimit2( UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2 ){
+#else
 static VOID CALLBACK timelimit2( UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2 ){
+#endif
 /************************************************
-§ŒÀŠÔŒo‰ß
+åˆ¶é™æ™‚é–“çµŒé
 ************************************************/
-	chudanDfPn = 1; // ‘Å‚¿Ø‚èƒtƒ‰ƒO(‹l‚İ’Tõ)
+	chudanDfPn = 1; // æ‰“ã¡åˆ‡ã‚Šãƒ•ãƒ©ã‚°(è©°ã¿æ¢ç´¢)
 }
 
 unsigned __stdcall PonderSearchThread( LPVOID p ){
 /************************************************
-‘Šè”Ô‚Å’Tõ‚ğ‚·‚éƒXƒŒƒbƒh
+ç›¸æ‰‹ç•ªã§æ¢ç´¢ã‚’ã™ã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰
 ************************************************/
 	THINK_INFO info;
 
@@ -258,7 +266,7 @@ unsigned __stdcall PonderSearchThread( LPVOID p ){
 
 unsigned __stdcall ThinkThread( LPVOID _p ){
 /**************************************************************
-vlƒ‹[ƒ`ƒ“‚ğŒÄ‚Ño‚·ƒXƒŒƒbƒh
+æ€è€ƒãƒ«ãƒ¼ãƒãƒ³ã‚’å‘¼ã³å‡ºã™ã‚¹ãƒ¬ãƒƒãƒ‰
 **************************************************************/
 	int ret = 0;
 	THINK_INFO info;
@@ -270,11 +278,11 @@ unsigned __stdcall ThinkThread( LPVOID _p ){
 
 	memset( &info, 0, sizeof(THINK_INFO) );
 
-	// ’èÕ‚ğ’²‚×‚éB
+	// å®šè·¡ã‚’èª¿ã¹ã‚‹ã€‚
 	if( pbook != NULL ){
 		ret = pbook->GetMove( pshogi, move );
 		if( ret != 0 ){
-			// ’èÕ‚Ì•\¦
+			// å®šè·¡ã®è¡¨ç¤º
 			moves.Init();
 			num = pbook->GetMoveAll( pshogi, moves );
 			DisplayBook( num, moves );
@@ -282,12 +290,12 @@ unsigned __stdcall ThinkThread( LPVOID _p ){
 	}
 
 	if( ret == 0 ){
-		// ‹l‚İ’Tõ
+		// è©°ã¿æ¢ç´¢
 		sikou_flag = 1;
 
-		// ƒ^ƒCƒ}[ƒIƒ“
+		// ã‚¿ã‚¤ãƒãƒ¼ã‚ªãƒ³
 		if( limit > 0 ){
-			// ‹l‚İ‚ğ’²‚×‚éŠÔ(Å‘å1•b)
+			// è©°ã¿ã‚’èª¿ã¹ã‚‹æ™‚é–“(æœ€å¤§1ç§’)
 			msec_mate = limit * 1000 / 10;
 			if( msec_mate > 1000 ){
 				msec_mate = 1000;
@@ -298,7 +306,7 @@ unsigned __stdcall ThinkThread( LPVOID _p ){
 
 		ret = pthink->DfPnSearch( pshogi, &move, NULL, &info, &chudanDfPn );
 
-		// ƒ^ƒCƒ}[ƒIƒt
+		// ã‚¿ã‚¤ãƒãƒ¼ã‚ªãƒ•
 		if( limit > 0 ){
 			timeKillEvent( tid );
 		}
@@ -310,25 +318,25 @@ unsigned __stdcall ThinkThread( LPVOID _p ){
 	}
 
 	if( ret == 0 ){
-		// ’Êí’Tõ
+		// é€šå¸¸æ¢ç´¢
 		sikou_flag = 1;
 
-		// ƒ^ƒCƒ}[ƒIƒ“
+		// ã‚¿ã‚¤ãƒãƒ¼ã‚ªãƒ³
 		if( limit > 0 ){
 			tid = timeSetEvent( limit * 1000 - msec_mate, 10, timelimit, 0, TIME_ONESHOT );
 		}
 
-		// ”½•œ[‰»’Tõ
+		// åå¾©æ·±åŒ–æ¢ç´¢
 		ret = pthink->Search( pshogi, &move, 32, &info, &chudan, 1 );
 
-		// ƒ^ƒCƒ}[ƒIƒt
+		// ã‚¿ã‚¤ãƒãƒ¼ã‚ªãƒ•
 		if( limit > 0 ){
 			timeKillEvent( tid );
 		}
 
 		DisplayResult( &info );
 
-		// “Š—¹
+		// æŠ•äº†
 		if( ret != 0 && presign->bad( info ) ){
 			ret = 0;
 		}
@@ -337,7 +345,7 @@ unsigned __stdcall ThinkThread( LPVOID _p ){
 	sikou_flag = 0;
 
 	if( ret == 0 )
-		// w‚µè‚ª‚È‚¢
+		// æŒ‡ã—æ‰‹ãŒãªã„
 		return (DWORD)0;
 
 	*(pmove) = move;
@@ -347,7 +355,7 @@ unsigned __stdcall ThinkThread( LPVOID _p ){
 
 extern "C" __declspec(dllexport) void sikou_ini( int* c ){
 /**************************************************************
-‰Šú‰» (c‚Í’†’fƒtƒ‰ƒO‚Ö‚Ìƒ|ƒCƒ“ƒ^)
+åˆæœŸåŒ– (cã¯ä¸­æ–­ãƒ•ãƒ©ã‚°ã¸ã®ãƒã‚¤ãƒ³ã‚¿)
 **************************************************************/
 	while( bWindowCreated == FALSE ){
 		Sleep( 10 );
@@ -374,7 +382,7 @@ extern "C" __declspec(dllexport) void sikou_ini( int* c ){
 extern "C" __declspec(dllexport) int sikou( int tesu, unsigned char kifu[][2],
 		int* timer_sec, int* i_moto, int* i_saki, int* i_naru ){
 /**************************************************************
-vlƒ‹[ƒ`ƒ“‚ÌŒÄ‚Ño‚µ
+æ€è€ƒãƒ«ãƒ¼ãƒãƒ³ã®å‘¼ã³å‡ºã—
 **************************************************************/
 	HANDLE hThread;
 	DWORD ret;
@@ -384,7 +392,7 @@ extern "C" __declspec(dllexport) int sikou( int tesu, unsigned char kifu[][2],
 	if( sikou_flag )
 		return 0;
 
-	// ‘Šè”ÔvlƒXƒŒƒbƒh‚ÌI—¹‚ğ‘Ò‚ÂB
+	// ç›¸æ‰‹ç•ªæ€è€ƒã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤ã€‚
 	if( g_hPonder != INVALID_HANDLE_VALUE ){
 		chudanPonder = 1;
 		WaitForSingleObject( g_hPonder, INFINITE );
@@ -392,7 +400,7 @@ extern "C" __declspec(dllexport) int sikou( int tesu, unsigned char kifu[][2],
 		g_hPonder = INVALID_HANDLE_VALUE;
 	}
 
-	// vl’†î•ñ•\¦‚Ì‰Šú‰»
+	// æ€è€ƒä¸­æƒ…å ±è¡¨ç¤ºã®åˆæœŸåŒ–
 	InitProgress();
 
 	if( pshogi == NULL ){
@@ -408,37 +416,37 @@ extern "C" __declspec(dllexport) int sikou( int tesu, unsigned char kifu[][2],
 	while( pshogi->GoBack() )
 		;
 
-	// Œ»İ‚Ì‹Ç–Ê‚ğì‚éB
+	// ç¾åœ¨ã®å±€é¢ã‚’ä½œã‚‹ã€‚
 	for( i = 0 ; i < tesu ; i++ ){
-		// ˆÚ“®Œ³
+		// ç§»å‹•å…ƒ
 		if( kifu[i][1] <= 81 ){
-			// ”Õã
+			// ç›¤ä¸Š
 			move.from = CSA2SUN( kifu[i][1] );
 		}
 		else{
-			// ‹î‘ä
+			// é§’å°
 			move.from = kifu[i][1] - 100;
 			move.from |= pshogi->GetSengo() | DAI;
 		}
 
-		// ˆÚ“®æ
+		// ç§»å‹•å…ˆ
 		if( kifu[i][0] <= 81 ){
-			// ¬‚ç‚È‚¢ê‡
+			// æˆã‚‰ãªã„å ´åˆ
 			move.to = CSA2SUN( kifu[i][0] );
 			move.nari = 0;
 		}
 		else{
-			// ¬‚éê‡
+			// æˆã‚‹å ´åˆ
 			move.to = CSA2SUN( kifu[i][0] - 100 );
 			move.nari = 1;
 		}
 
-		// ·‚µè‚ğ“ü—Í
+		// å·®ã—æ‰‹ã‚’å…¥åŠ›
 		if( !pshogi->Move( move ) )
 			return 0;
 	}
 
-	// vlŠJn
+	// æ€è€ƒé–‹å§‹
 	chudan = 0;
 	chudanDfPn = 0;
 	hThread = (HANDLE)_beginthreadex( NULL, 0, ThinkThread, (LPVOID)&move, 0, NULL );
@@ -459,25 +467,25 @@ extern "C" __declspec(dllexport) int sikou( int tesu, unsigned char kifu[][2],
 
 	CloseHandle( hThread );
 
-	// Œ‹‰Ê‚ğ•Ô‚·B
+	// çµæœã‚’è¿”ã™ã€‚
 
-	// ˆÚ“®Œ³
+	// ç§»å‹•å…ƒ
 	if( move.from & DAI ){
-		// ‹î‘ä
+		// é§’å°
 		*i_moto = ( move.from & ~(DAI | SENGO) ) + 100;
 	}
 	else{
-		// ”Õã
+		// ç›¤ä¸Š
 		*i_moto = SUN2CSA( move.from );
 	}
 
-	// ˆÚ“®æ
+	// ç§»å‹•å…ˆ
 	*i_saki = SUN2CSA( move.to );
 	*i_naru = move.nari;
 
-	// ‘Šè”Ôvl‚ğŠJn
+	// ç›¸æ‰‹ç•ªæ€è€ƒã‚’é–‹å§‹
 	if( bPonder && chudan_flag != NULL ){
-		// vl’†î•ñ•\¦‚Ì‰Šú‰»
+		// æ€è€ƒä¸­æƒ…å ±è¡¨ç¤ºã®åˆæœŸåŒ–
 		InitProgress();
 
 		chudanPonder = 0;
@@ -490,11 +498,11 @@ extern "C" __declspec(dllexport) int sikou( int tesu, unsigned char kifu[][2],
 
 extern "C" __declspec(dllexport) void sikou_end(){
 /**************************************************************
-I—¹
+çµ‚äº†
 **************************************************************/
 	chudan_flag = NULL;
 
-	// vl‚ÌI—¹‚ğ‘Ò‚Â
+	// æ€è€ƒã®çµ‚äº†ã‚’å¾…ã¤
 	chudan = 1;
 	chudanDfPn = 1;
 	while( sikou_flag ){
@@ -502,7 +510,7 @@ extern "C" __declspec(dllexport) void sikou_end(){
 		Sleep( 10 );
 	}
 
-	// ‘Šè”ÔvlƒXƒŒƒbƒh‚ÌI—¹‚ğ‘Ò‚ÂB
+	// ç›¸æ‰‹ç•ªæ€è€ƒã‚¹ãƒ¬ãƒƒãƒ‰ã®çµ‚äº†ã‚’å¾…ã¤ã€‚
 	if( g_hPonder != INVALID_HANDLE_VALUE ){
 		chudanPonder = 1;
 		WaitForSingleObject( g_hPonder, INFINITE );

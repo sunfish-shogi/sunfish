@@ -1,4 +1,4 @@
-/* uint96.cpp
+﻿/* uint96.cpp
  * R.Kubo 2011-2012
  * 96bit符号無し整数uint96クラス
  */
