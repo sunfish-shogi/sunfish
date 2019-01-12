@@ -25,7 +25,7 @@ override CFLAGS+= -O3
 #override CFLAGS+= -g
 override CFLAGS+= -DNDEBUG
 override CFLAGS+= -DNLEARN
-override CFLAGS+= -DTDEBUG
+#override CFLAGS+= -DTDEBUG
 
 #override OPTN+= -pg
 #override CFLAGS+= -pg
